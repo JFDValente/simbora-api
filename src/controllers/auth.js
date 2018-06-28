@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const authConfig = require('../config/auth');
-const User = require('../models/User');
+const User = require('../models/user');
 
 const router = express.Router();
 
@@ -40,7 +40,7 @@ router.post('/authenticate', async(req,res) => {
 
     if(!user)
       return res.status(400).send({'error': 'Usuário não encontrado'});
-	  
+
     if(!await bcrypt.compare(password, user.password))
       return res.status(400).send({'error': 'Senha inválida'});
 
@@ -50,6 +50,35 @@ router.post('/authenticate', async(req,res) => {
       user,
       token: generateToken({id: user.id}),
     });
+});
+
+router.put('/edit', async(req,res) =>{
+  userReq = req.body;
+  const {email} = userReq;
+  console.log(userReq);
+
+  try{
+    Users.findOne({email},function(err,user){
+        if (!err){
+            if(user){
+                console.log(user);
+                user.name = userReq.name;
+                user.phonenumber = userReq.phonenumber;
+                user.cpf = userReq.cpf;
+                user.registrationUFAM = userReq.registrationUFAM;
+                user.save();
+                return res.send({user});
+            }else{
+                return res.status(412).send({'error': 'Usuário não registrado previamente'});
+            }
+        }else{
+            throw err;
+            res.status(500).send({'error': err});
+        }
+    });
+  }catch(err){
+    return res.status(500).send({'error': err});
+  }
 });
 
 module.exports = app => app.use('/auth',router);
