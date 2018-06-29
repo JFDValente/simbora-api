@@ -16,12 +16,12 @@ router.post('/', async(req,res) =>{
         let rides = []
 
         if(routes){
-            for(i=10; i<500; i+=10){
+            for(i=10; i<500; i= i+10){
                 console.log("primeiro for "+i);
                 for(j=0; j<routes.length; j++){
                   console.log("segundo for "+j);
                     let route = routes[j];
-                    let distance = j
+                    let distance = i;
                     let isWithin = await PolyUtil.isLocationOnEdge(point,route.polyline,true,distance)
                     if(isWithin){
                         console.log("encontrou uma rota");
