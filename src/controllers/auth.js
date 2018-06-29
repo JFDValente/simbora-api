@@ -58,19 +58,14 @@ router.put('/edit', async(req,res) =>{
   console.log(userReq);
 
   try{
-    Users.findOne({email},function(err,user){
+    Users.updateOne({email},{
+        name : userReq.name,
+        phonenumber : userReq.phonenumber,
+        cpf : userReq.cpf,
+        registrationUFAM : userReq.registrationUFAM
+    },function(err, raw){
         if (!err){
-            if(user){
-                console.log(user);
-                user.name = userReq.name;
-                user.phonenumber = userReq.phonenumber;
-                user.cpf = userReq.cpf;
-                user.registrationUFAM = userReq.registrationUFAM;
-                user.save();
-                return res.send({user});
-            }else{
-                return res.status(412).send({'error': 'Usuário não registrado previamente'});
-            }
+            return res.send({raw});
         }else{
             throw err;
             res.status(500).send({'error': err});
