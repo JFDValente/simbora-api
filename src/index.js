@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 require('./controllers/auth')(app);
 require('./controllers/routemap')(app);
+require('./controllers/ride')(app);
 
 const port = process.env.PORT || 3000
 
