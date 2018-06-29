@@ -1,6 +1,6 @@
 const mongoose = require('../database');
 
-const LatLngSchema = new mongoose.Scheme({
+const LatLngSchema = new mongoose.Schema({
   latitude:{
     type: Number,
   },
@@ -17,7 +17,7 @@ const PolylineRouteSchema = new mongoose.Schema({
   idUser:{
     type: String,
     required: true,
-  }
+  },
   actived:{
     type: Boolean,
     required: true,

@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 require('./controllers/auth')(app);
-//require('./controllers/user')(app);
+require('./controllers/routemap')(app);
 
 const port = process.env.PORT || 3000
 

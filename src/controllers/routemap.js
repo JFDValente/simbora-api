@@ -1,35 +1,26 @@
 const express = require('express');
-const polylineroute = require('../models/polylineroute');
+const Polylineroute = require('../models/polylineroute');
 
 const router = express.Router();
 
 router.post('/', async(req,res) =>{
-  routemapReq = req.body;
-  const {email} = userReq;
-  console.log(userReq);
+    routemapReq = req.body;
+    console.log(routemapReq);
+    let { idUser } = routemapReq;
 
-  try{
-    Users.findOne({email},function(err,user){
-        if (!err){
-            if(user){
-                console.log(user);
-                user.name = userReq.name;
-                user.phonenumber = userReq.phonenumber;
-                user.cpf = userReq.cpf;
-                user.registrationUFAM = userReq.registrationUFAM;
-                user.save();
-                return res.send({user});
-            }else{
-                return res.status(412).send({'error': 'Usuário não registrado previamente'});
-            }
-        }else{
-            throw err;
-            res.status(500).send({'error': err});
-        }
-    });
-  }catch(err){
-    return res.status(500).send({'error': err});
-  }
+    try{
+        if(await !User.findOne({_id: idUser}))
+            return res.status(412).send({'error': 'Usuário requisitante não existe'});
+
+        const polylineroute = await Polylineroute.create(routemapReq);
+        let { _id } = polylineroute
+
+        return res.send({ _id });
+
+    }catch(err){
+        console.log(err);
+        res.status(500).send({erro: 'Confirme Route Failed!'});
+    }
 });
 
-module.exports = app => app.use('/user',router);
+module.exports = app => app.use('/routeMap',router);
