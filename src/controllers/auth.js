@@ -59,12 +59,7 @@ router.put('/edit', async(req,res) =>{
   console.log(email);
 
   try{
-    Users.updateOne({email:email},{
-        name : userReq.name,
-        phonenumber : userReq.phonenumber,
-        cpf : userReq.cpf,
-        registrationUFAM : userReq.registrationUFAM
-    },function(err, raw){
+    Users.findOneAndUpdate({email:email},userReq,function(err, raw){
         if (!err){
             return res.send({raw});
         }else{
