@@ -17,7 +17,7 @@ router.post('/', async(req,res) =>{
 
         if(routes){
             for(ik=10; ik<500; ik++){
-                console.log("primeiro for "+i);
+                console.log("primeiro for "+ik);
                 for(j=0; j<routes.length; j++){
                   console.log("segundo for "+j);
                     let route = routes[j];
