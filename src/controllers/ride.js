@@ -16,7 +16,7 @@ router.post('/', async(req,res) =>{
         let rides = []
 
         if(routes){
-            for(i=10; i<500; i= i+10){
+            for(i=10; i<500; i++){
                 console.log("primeiro for "+i);
                 for(j=0; j<routes.length; j++){
                   console.log("segundo for "+j);
