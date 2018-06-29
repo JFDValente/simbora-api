@@ -22,7 +22,7 @@ router.post('/', async(req,res) =>{
                   console.log("segundo for "+j);
                     let route = routes[j];
                     let distance = i
-                    let isWithin = PolyUtil.isLocationOnEdge(point,route.polyline,true,distance)
+                    let isWithin = await PolyUtil.isLocationOnEdge(point,route.polyline,true,distance)
                     if(isWithin){
                         console.log("encontrou uma rota");
                         let user = await User.findOne({_id: route.idUser})
