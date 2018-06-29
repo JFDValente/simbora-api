@@ -54,7 +54,7 @@ router.post('/authenticate', async(req,res) => {
 
 router.put('/edit', async(req,res) =>{
   userReq = req.body;
-  const {email} = userReq;
+  let {email} = userReq;
   console.log(userReq);
   console.log(email);
 
