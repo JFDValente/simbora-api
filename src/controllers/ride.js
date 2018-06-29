@@ -4,7 +4,7 @@ const Polylineroute = require('../models/polylineroute')
 const PolyUtil = require('../util/PolyUtil')
 const router = express.Router()
 
-router.get('/', async(req,res) =>{
+router.post('/', async(req,res) =>{
     destiny = req.body
     console.log(destiny)
 
