@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 require('./controllers/auth')(app);
 //require('./controllers/user')(app);
 
-var port = 8080
+const port = process.env.PORT || 3000
+
 app.listen(port,function(err){
   if (!err){
     console.log('Servidor iniciado na porta '+port);
