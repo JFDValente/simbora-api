@@ -54,12 +54,12 @@ router.post('/authenticate', async(req,res) => {
 
 router.put('/edit', async(req,res) =>{
   userReq = req.body;
-  let {email} = userReq;
+  let { _id } = userReq;
   console.log(userReq);
   console.log(email);
 
   try{
-    Users.findOneAndUpdate({email:email},userReq,function(err, raw){
+    Users.findOneAndUpdate({_id},userReq,{upsert: false},function(err, raw){
         if (!err){
             return res.send({raw});
         }else{
