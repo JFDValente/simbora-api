@@ -56,7 +56,7 @@ router.put('/edit', async(req,res) =>{
   userReq = req.body;
   let { _id } = userReq;
   console.log(userReq);
-  console.log(email);
+  console.log(_id);
 
   try{
     Users.findOneAndUpdate({_id},userReq,{upsert: false},function(err, raw){
