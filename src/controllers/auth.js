@@ -59,7 +59,9 @@ router.put('/edit', async(req,res) =>{
   console.log(_id);
 
   try{
-    Users.findOneAndUpdate({_id},userReq,{upsert: false},function(err){
+    Users.update({_id},{$set: {
+      userReq
+    }},{upsert: false},function(err){
         if (!err){
             return res.send({raw});
         }
