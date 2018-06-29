@@ -56,9 +56,10 @@ router.put('/edit', async(req,res) =>{
   userReq = req.body;
   const {email} = userReq;
   console.log(userReq);
+  console.log(email);
 
   try{
-    Users.updateOne({email},{
+    Users.updateOne({email:email},{
         name : userReq.name,
         phonenumber : userReq.phonenumber,
         cpf : userReq.cpf,
