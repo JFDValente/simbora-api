@@ -19,7 +19,7 @@ router.post('/', async(req,res) =>{
             for(i=10; i<500; i+=10){
                 for(j=0; j<routes.length; j++){
                     let route = routes[j];
-                    let isWithin = PolyUtil.isLocationOnEdge(point,route,true,i)
+                    let isWithin = PolyUtil.isLocationOnEdge(point,route.polyline,true,i)
                     if(isWithin){
                         let user = await User.findOne({_id: route.idUser})
                         rides.push({
