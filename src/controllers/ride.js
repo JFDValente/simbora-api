@@ -17,18 +17,15 @@ router.post('/', async(req,res) =>{
 
         if(routes){
             for(ik=10; ik<500; ik++){
-                console.log("primeiro for "+ik);
                 for(j=0; j<routes.length; j++){
-                  console.log("segundo for "+j);
                     let route = routes[j];
-                    //let distance = i;
-                    let isWithin = await PolyUtil.isLocationOnEdge(point,route.polyline,true,100)
+                    let isWithin = await PolyUtil.isLocationOnEdge(point,route.polyline,true,ik)
                     if(isWithin){
                         console.log("encontrou uma rota");
                         let user = await User.findOne({_id: route.idUser})
                         rides.push({
-                          name: user.name,
-                          distance: distance,
+                          name: "name teste",//user.name,
+                          distance: ik,
                         });
                         routes.splice(j, 1)
                         if(rides.length == 15){
