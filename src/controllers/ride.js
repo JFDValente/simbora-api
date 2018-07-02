@@ -1,6 +1,7 @@
 const express = require('express')
 const User = require('../models/user')
 const Polylineroute = require('../models/polylineroute')
+const Riderequest = require('../models/riderequest')
 const PolyUtil = require('../util/PolyUtil')
 const router = express.Router()
 
@@ -9,7 +10,7 @@ router.post('/', async(req,res) =>{
     console.log(destiny)
 
     try{
-        let { point, address } = destiny
+        let { point } = destiny
 
         let routes = await Polylineroute.find({actived: true})
 
@@ -23,7 +24,8 @@ router.post('/', async(req,res) =>{
                     if(isWithin){
                         let user = await User.findOne({_id: route.idUser})
                         rides.push({
-                          name: "name teste",//user.name,
+                          idDriver: user._id,
+                          nameDriver: user.name,
                           distance: ik,
                         });
                         routes.splice(j, 1)
@@ -47,6 +49,18 @@ router.post('/', async(req,res) =>{
         console.log(err)
         res.status(500).send({erro: 'Route Find Failed!'})
     }
+});
+
+router.post('/requestride', async(req,res) =>{
+
+    try{
+        const riderequest = await Riderequest.create(req.body);
+        return res.send({riderequest});
+    }catch(err){
+      console.log(err);
+      res.status(500).send({erro: 'Request Ride failed'});
+    }
+
 });
 
 module.exports = app => app.use('/ride',router);
