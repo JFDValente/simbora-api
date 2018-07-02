@@ -13,6 +13,10 @@ const RiderequestSchema = new mongoose.Schema({
   Destiny:{
     type: String,
   },
+  Status:{
+    type: String,
+    default: false,
+  },
   createdAt:{
     type: Date,
     default: Date.now,
