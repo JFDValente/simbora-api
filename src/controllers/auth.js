@@ -59,11 +59,24 @@ router.put('/edit', async(req,res) =>{
   console.log(_id);
 
   try{
-    Users.update({_id},{$set: {
-      userReq
-    }},{upsert: false},function(err){
+    User.findByIdAndUpdate(_id,userReq,{new: true},(err,user) => {
         if (!err){
-            return res.send({raw});
+            return res.send(user);
+        }
+    });
+  }catch(err){
+    return res.status(500).send({'error': err});
+  }
+});
+
+router.put('/disable', async(req,res) =>{
+  userReq = req.body;
+  let { _id } = userReq;
+
+  try{
+    User.findByIdAndUpdate(_id,{actived: false},{new: true},(err,user) => {
+        if (!err){
+            return res.send(user);
         }
     });
   }catch(err){

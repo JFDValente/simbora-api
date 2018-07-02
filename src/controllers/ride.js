@@ -21,7 +21,6 @@ router.post('/', async(req,res) =>{
                     let route = routes[j];
                     let isWithin = await PolyUtil.isLocationOnEdge(point,route.polyline,true,ik)
                     if(isWithin){
-                        console.log("encontrou uma rota");
                         let user = await User.findOne({_id: route.idUser})
                         rides.push({
                           name: "name teste",//user.name,
@@ -29,12 +28,14 @@ router.post('/', async(req,res) =>{
                         });
                         routes.splice(j, 1)
                         if(rides.length == 15){
+                            console.log({rides})
                             res.send({rides})
                         }
                     }
                 }
             }
             if(rides.length>0){
+                console.log({rides})
                 res.send({rides})
             }else{
                 return res.send({msg: 'Não há rotas próximas ao seu ponto de destino' })
