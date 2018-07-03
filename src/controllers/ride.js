@@ -24,11 +24,19 @@ router.post('/', async(req,res) =>{
                     if(isWithin){
                         let user = await User.findById(route.idUser)
                         console.log(user);
-                        rides.push({
-                          idDriver: 1,
-                          nameDriver: 'name teste',
-                          distance: ik,
-                        });
+                        if(user){
+                          rides.push({
+                            idDriver: user._id,
+                            nameDriver: user.name,
+                            distance: ik,
+                          });
+                        }else{
+                          rides.push({
+                            idDriver: 1,
+                            nameDriver: 'name teste',
+                            distance: ik,
+                          });
+                        }
                         routes.splice(j, 1)
                         if(rides.length == 15){
                             console.log({rides})
