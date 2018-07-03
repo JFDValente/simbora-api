@@ -26,7 +26,7 @@ router.post('/', async(req,res) =>{
                         console.log(route);
                         rides.push({
                           idDriver: 1,
-                          nameDriver: user.name,
+                          nameDriver: 'name teste',
                           distance: ik,
                         });
                         routes.splice(j, 1)
